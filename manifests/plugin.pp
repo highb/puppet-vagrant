@@ -10,15 +10,10 @@ define vagrant::plugin(
   $ensure  = 'present',
   $force   = false,
   $license = undef,
+  $plugin_name = $name,
 ) {
   include vagrant
   include boxen::config
-
-  if $name =~ /^vagrant-/ {
-    $plugin_name = $name
-  } else {
-    $plugin_name = "vagrant-${name}"
-  }
 
   if $license {
     file { "/Users/${::boxen_user}/.vagrant.d/license-${plugin_name}.lic":
